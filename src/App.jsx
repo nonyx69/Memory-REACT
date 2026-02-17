@@ -19,7 +19,6 @@ export default function MemoryGame() {
     if (firstChoice === null) {
       setFirstChoice(index);
       setFlipped([index]);
-
     } else {
       setFlipped([firstChoice, index]);
       if (deck[firstChoice] === deck[index]) {
@@ -33,21 +32,42 @@ export default function MemoryGame() {
     }
   };
 
+  const resetGame = () => {
+    setDeck(shuffleArray(cartes));
+    setFirstChoice(null);
+    setMatchedCards([]);
+    setFlipped([]);
+  };
+
+  const isGameFinished = matchedCards.length === cartes.length;
+
   return (
-    <div className="memory-game">
-      {deck.map((card, index) => {
-        const isFlipped = flipped.includes(index) || matchedCards.includes(card);
+    <div className="memory-game-container">
+      <div className="memory-game">
+        {deck.map((card, index) => {
+          const isFlipped = flipped.includes(index) || matchedCards.includes(card);
+          const isMatched = matchedCards.includes(card);
 
-        return (
-          <div key={index} className={`card ${isFlipped ? "flipped" : ""}`} onClick={() => handleClick(index)}>
-
-            <div className="card-inner">
-              <div className="card-front">?</div>
-              <div className="card-back">{card}</div>
+          return (
+            <div
+              key={index}
+              className={`card ${isFlipped ? "flipped" : ""} ${isMatched ? "matched" : ""}`}
+              onClick={() => handleClick(index)}
+            >
+              <div className="card-inner">
+                <div className="card-front">?</div>
+                <div className="card-back">{card}</div>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
+
+      {isGameFinished && (
+        <button className="replay-button" onClick={resetGame}>
+          Rejouer
+        </button>
+      )}
     </div>
   );
 }
