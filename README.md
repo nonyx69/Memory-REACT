@@ -1,14 +1,16 @@
 ## Projet Memory
 
-const cartes = ["", ""]
+const cartes = ["A", "B", "C", "..."]
 
 Mettre le nombre de carte souhaiter (avec les lettres entre "")
 
-AVANT :
+Dans le terminal : npm run dev
+
+# AVANT :
 
 ![alt text](public/Image1.png)
 
 
-APRES :
+# APRES :
 
 ![alt text](public/Image2.png)
